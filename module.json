@@ -1,0 +1,42 @@
+{
+  "name": "edit-owned-item-effects",
+  "title": "Edit Owned Item Effects",
+  "description": "A module which lets the GM edit the effects of an Owned Item.",
+  "version": "0.0.1",
+  "author": "Andrew Krigline",
+  "authors": [
+    {
+      "name": "Andrew Krigline",
+      "discord": "Calego#0914",
+      "url": "https://github.com/ElfFriend-DnD",
+      "ko-fi": "elffriend",
+      "patreon": "ElfFriend_DnD"
+    }
+  ],
+  "system": [ "dnd5e" ],
+  "esmodules": [
+    "./scripts/edit-owned-item-effects.js"
+  ],
+  "styles": [
+    "./styles/edit-owned-item-effects.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "minimumCoreVersion": "0.8.9",
+  "compatibleCoreVersion": "0.8.9",
+  "url": "https://github.com/ElfFriend-DnD/foundryvtt-edit-owned-item-effects",
+  "bugs": "https://github.com/ElfFriend-DnD/foundryvtt-edit-owned-item-effects/issues",
+  "changelog": "https://github.com/ElfFriend-DnD/foundryvtt-edit-owned-item-effects/releases",
+  "manifest": "https://github.com/ElfFriend-DnD/foundryvtt-edit-owned-item-effects/releases/latest/download/module.json",
+  "download": "https://github.com/ElfFriend-DnD/foundryvtt-edit-owned-item-effects/releases/latest/download/module.zip",
+  "license": "https://github.com/ElfFriend-DnD/foundryvtt-edit-owned-item-effects/raw/main/LICENSE",
+  "readme": "https://github.com/ElfFriend-DnD/foundryvtt-edit-owned-item-effects/raw/main/README.md",
+  "flags": {
+    "allowBugReporter": true
+  }
+}
