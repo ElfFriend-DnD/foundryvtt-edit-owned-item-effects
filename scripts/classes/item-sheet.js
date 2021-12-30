@@ -19,19 +19,11 @@ export class EditOwnedItemEffectsItemSheet {
     console.log(html.find('a[data-action="toggle"]'))
 
     // unregister all remaining listeners on the effect controls
-    // TODO: FIXME
     html.find(".effect-control").unbind('click');
     console.log(html.find(".effect-control"))
 
     // remove the 'activate' button on the effect list as it's confusing
     html.find('[data-action="toggle"]').remove();
-
-    // remove the 'delete' button on owned item effects as this is not possible
-    // html.find('.effects-list [data-action="delete"]').remove();
-
-    // remove the 'create' button on owned item effects as that's out of scope
-    // todo: make it in-scope... lol
-    // html.find('.effects-list [data-action="create"]').remove();
 
     // add 'transfer' button to the AEs which should be transferrable
     app.item.effects.filter(effect => effect.data.transfer).forEach(effect => {

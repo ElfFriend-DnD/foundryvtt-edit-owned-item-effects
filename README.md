@@ -10,3 +10,14 @@
 [![patreon](https://img.shields.io/badge/-patreon-%23FF424D)](https://www.patreon.com/ElfFriend_DnD)
 
 This module's goal is to allow GMs to add/modify effects for Owned Items.
+
+
+### Compatibility
+
+- DAE: Uncertain, use at your risk. DAE already has the ability to edit effects on Owned Items.
+
+
+
+
+https://user-images.githubusercontent.com/7644614/147790779-3b3b991f-f52b-4e49-9a10-bc37e5198543.mp4
+

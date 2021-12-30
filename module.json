@@ -13,7 +13,6 @@
       "patreon": "ElfFriend_DnD"
     }
   ],
-  "system": [ "dnd5e" ],
   "esmodules": [
     "./scripts/edit-owned-item-effects.js"
   ],
@@ -28,7 +27,7 @@
     }
   ],
   "minimumCoreVersion": "0.8.9",
-  "compatibleCoreVersion": "0.8.9",
+  "compatibleCoreVersion": "9",
   "url": "https://github.com/ElfFriend-DnD/foundryvtt-edit-owned-item-effects",
   "bugs": "https://github.com/ElfFriend-DnD/foundryvtt-edit-owned-item-effects/issues",
   "changelog": "https://github.com/ElfFriend-DnD/foundryvtt-edit-owned-item-effects/releases",
