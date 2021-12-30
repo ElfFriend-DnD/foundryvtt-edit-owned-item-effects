@@ -13,8 +13,6 @@ export class EditOwnedItemEffects {
 
 Hooks.on('init', () => {
   console.log(`${EditOwnedItemEffects.MODULE_NAME} | Initializing ${EditOwnedItemEffects.MODULE_TITLE}`);
-
-  // setupEasyEffect();
 })
 
 Hooks.on("ready", async () => {

@@ -1,4 +1,3 @@
-import { EditOwnedItemEffects } from '../edit-owned-item-effects.js'
 import { EditOwnedItemEffectsActiveEffect } from './owned-item-effect.js';
 
 /**
@@ -16,11 +15,8 @@ export class EditOwnedItemEffectsItemSheet {
       return;
     }
 
-    console.log(html.find('a[data-action="toggle"]'))
-
     // unregister all remaining listeners on the effect controls
     html.find(".effect-control").unbind('click');
-    console.log(html.find(".effect-control"))
 
     // remove the 'activate' button on the effect list as it's confusing
     html.find('[data-action="toggle"]').remove();

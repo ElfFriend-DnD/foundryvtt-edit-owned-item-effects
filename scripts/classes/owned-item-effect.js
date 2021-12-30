@@ -18,6 +18,9 @@ export class EditOwnedItemEffectsActiveEffect extends ActiveEffect {
     EditOwnedItemEffects.log('Instanciated Owned Item Effect', this);
   }
 
+  /**
+   * Fake Create this effect by instead updating the parent embedded Item document's array of effects.
+   */
   async create(context) {
     const dataToCreate = this.toJSON();
 
@@ -44,7 +47,9 @@ export class EditOwnedItemEffectsActiveEffect extends ActiveEffect {
     }
   }
 
-
+  /**
+   * Fake delete this effect by instead updating the parent embedded Item document's array of effects.
+   */
   async delete(context) {
     EditOwnedItemEffects.log('Attempting delete on Owned Item Effect', context);
 
@@ -79,7 +84,6 @@ export class EditOwnedItemEffectsActiveEffect extends ActiveEffect {
    */
   async update(data = {}, context = {}) {
     EditOwnedItemEffects.log('Attempting update on Owned Item Effect', data, context);
-    // debugger;
 
     const embeddedItem = this.parent;
     if (!(embeddedItem instanceof Item) && (embeddedItem.parent instanceof Actor)) {
@@ -133,13 +137,15 @@ export class EditOwnedItemEffectsActiveEffect extends ActiveEffect {
     if (this.data.transfer) {
       ui.notifications.notify(game.i18n.localize(`${EditOwnedItemEffects.MODULE_NAME}.not-reflected`));
     }
-    
+
     if (!this.data.transfer && data.transfer) {
       ui.notifications.notify(game.i18n.localize(`${EditOwnedItemEffects.MODULE_NAME}.not-transferred`));
     }
-
   }
 
+  /**
+   * Applies the effect to the grandparent actor.
+   */
   async transferToActor() {
     if (!this.data.transfer) {
       return;
@@ -160,6 +166,10 @@ export class EditOwnedItemEffectsActiveEffect extends ActiveEffect {
     EditOwnedItemEffectsActor.applyEffectToActor(actor, [this.uuid]);
   }
 
+  /**
+   * Gets default duration values from the provided item.
+   * Assumes dnd5e data model, falls back to 1 round default.
+   */
   static getDurationFromItem(item, passive) {
 
     if (passive === true) {
@@ -205,6 +215,10 @@ export class EditOwnedItemEffectsActiveEffect extends ActiveEffect {
     }
   }
 
+  /**
+   * Overridden handlers for the buttons on the item sheet effect list
+   * Assumes core active effect list controls (what 5e uses)
+   */
   static onManageOwnedItemActiveEffect(event, owner) {
     event.preventDefault();
 
@@ -224,30 +238,9 @@ export class EditOwnedItemEffectsActiveEffect extends ActiveEffect {
 
     const ownedItemEffect = new EditOwnedItemEffectsActiveEffect(effectData, owner);
 
-    // if (ownedItemEffect.data.transfer) {
-
-    //   if (a.dataset.action === 'transfer') {
-    //     return ownedItemEffect.transferToActor();
-    //   }
-
-    //   ui.notifications.warn("Managing Transfered Active Effects within an Owned Item is not currently supported. Edit the Effect on the Actor Instead.");
-    //   return;
-    // }
-
     switch (a.dataset.action) {
-
-      
       case "create":
         return ownedItemEffect.create();
-      
-
-        // return owner.createEmbeddedDocuments("ActiveEffect", [{
-        //   label: game.i18n.localize("DND5E.EffectNew"),
-        //   icon: "icons/svg/aura.svg",
-        //   origin: owner.uuid,
-        //   "duration.rounds": li.dataset.effectType === "temporary" ? 1 : undefined,
-        //   disabled: li.dataset.effectType === "inactive"
-        // }]);
 
       case "transfer":
         return ownedItemEffect.transferToActor();
@@ -259,5 +252,4 @@ export class EditOwnedItemEffectsActiveEffect extends ActiveEffect {
         return ownedItemEffect.sheet.render(true);
     }
   }
-
 }

@@ -16,9 +16,6 @@
   "esmodules": [
     "./scripts/edit-owned-item-effects.js"
   ],
-  "styles": [
-    "./styles/edit-owned-item-effects.css"
-  ],
   "languages": [
     {
       "lang": "en",
