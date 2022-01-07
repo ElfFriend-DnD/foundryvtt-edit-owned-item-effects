@@ -1,5 +1,4 @@
 import { EditOwnedItemEffects } from '../edit-owned-item-effects.js'
-import { EditOwnedItemEffectsActor } from './actor.js';
 
 /**
  * Handles all the logic related to the Active Effect itself
@@ -80,7 +79,7 @@ export class EditOwnedItemEffectsActiveEffect extends ActiveEffect {
   }
 
   /**
-   * Fake Update this Effec Document by instead updating the parent embedded Item document's array of effects.
+   * Fake Update this Effect Document by instead updating the parent embedded Item document's array of effects.
    */
   async update(data = {}, context = {}) {
     EditOwnedItemEffects.log('Attempting update on Owned Item Effect', data, context);
@@ -147,10 +146,6 @@ export class EditOwnedItemEffectsActiveEffect extends ActiveEffect {
    * Applies the effect to the grandparent actor.
    */
   async transferToActor() {
-    if (!this.data.transfer) {
-      return;
-    }
-
     const actor = this.parent?.parent;
 
     if (!actor || !(actor instanceof Actor)) {
@@ -163,7 +158,10 @@ export class EditOwnedItemEffectsActiveEffect extends ActiveEffect {
       actor
     });
 
-    EditOwnedItemEffectsActor.applyEffectToActor(actor, [this.uuid]);
+    return ActiveEffect.create({
+      ...this.toJSON(),
+      origin: this.parent.uuid,
+    }, { parent: actor });
   }
 
   /**
@@ -251,5 +249,17 @@ export class EditOwnedItemEffectsActiveEffect extends ActiveEffect {
       case "edit":
         return ownedItemEffect.sheet.render(true);
     }
+  }
+
+  static create(effectData, context) {
+    const parent = context.parent;
+
+    if (!parent) {
+      throw new Error('Parent must be provided on the creation context');
+    }
+
+    const ownedItemEffect = new this(effectData, parent);
+
+    return ownedItemEffect.create();
   }
 }

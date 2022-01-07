@@ -1,3 +1,4 @@
+import { EditOwnedItemEffects } from '../edit-owned-item-effects.js';
 import { EditOwnedItemEffectsActiveEffect } from './owned-item-effect.js';
 
 /**
@@ -8,6 +9,17 @@ export class EditOwnedItemEffectsItemSheet {
     Hooks.on('renderItemSheet', this.handleItemSheetRender);
   }
 
+  /**
+   * Only applies to owned items which can be edited
+   * Removes some effect controls
+   * Unregisters all Core Effect Control listeners
+   * Adds a "Transfer" button for effects marked "Transfer"
+   * Re-registers custom listeners for create, edit, and delete controls
+   * 
+   * @param {*} app 
+   * @param {*} html 
+   * @returns 
+   */
   static handleItemSheetRender = (app, html) => {
     const effectsList = html.find('.tab.effects-list');
 
@@ -37,5 +49,60 @@ export class EditOwnedItemEffectsItemSheet {
       ev.stopPropagation();
       EditOwnedItemEffectsActiveEffect.onManageOwnedItemActiveEffect(ev, app.item);
     })
+
+    EditOwnedItemEffects.log('binding dragdrop');
+
+    const dragDrop = new DragDrop({
+      dropSelector: '.effects-list',
+      permissions: {
+        dragdrop: () => app.isEditable && app.item.isOwned 
+      },
+      callbacks: {
+        drop: this._onDrop(app.object) 
+      }
+    });
+
+    dragDrop.bind(html[0]);
+  }
+
+  /**
+   * When an effect is dropped on the sheet, create a copy of that effect
+   */
+  static _onDrop = (effectParent) => async (event) => {
+    if (!effectParent) {
+      return;
+    }
+
+    // Try to extract the data
+    let dropData;
+    try {
+      dropData = JSON.parse(event.dataTransfer.getData('text/plain'));
+
+      EditOwnedItemEffects.log('DragDrop drop', {
+        event,
+        dropData,
+      });
+    } catch (err) {
+      EditOwnedItemEffects.log('DragDrop drop', {
+        err,
+      });
+
+      return false;
+    }
+
+    if (dropData.type !== 'ActiveEffect') return false;
+
+    EditOwnedItemEffects.log('DragDrop drop starting:', {
+      effectParent,
+      dropData,
+    });
+
+    return EditOwnedItemEffectsActiveEffect.create(
+      {
+        ...dropData.data,
+        origin: effectParent.uuid,
+        _id: null,
+      }, {parent: effectParent}
+    );
   }
 }
