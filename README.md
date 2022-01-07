@@ -29,10 +29,10 @@ Tested with dnd5e, might work on other systems as well though.
 
 Super Charged by:
 
+- [Drop Effects on Items](https://github.com/ElfFriend-DnD/foundryvtt-drop-effects-on-items)
 - [Item Effects to Chat D&D5e](https://github.com/ElfFriend-DnD/foundryvtt-item-effects-to-chat-5e)
 
 Uncertain Compatiblity with:
 
 - DAE: Use at your risk. DAE already has the ability to edit effects on Owned Items.
 - Any system that isn't dnd5e. The core concept should be system-agnostic but there might be details missing.
-

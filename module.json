@@ -2,7 +2,7 @@
   "name": "edit-owned-item-effects",
   "title": "Edit Owned Item Effects",
   "description": "A module which lets the GM edit the effects of an Owned Item.",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "author": "Andrew Krigline",
   "authors": [
     {
