@@ -9,7 +9,7 @@
 [![ko-fi](https://img.shields.io/badge/-buy%20me%20a%20coke-%23FF5E5B)](https://ko-fi.com/elffriend)
 [![patreon](https://img.shields.io/badge/-patreon-%23FF424D)](https://www.patreon.com/ElfFriend_DnD)
 
-This module's goal is to allow GMs to add/modify effects for Owned Items.
+This module's goal is to allow GMs to add/modify effects for Owned Items. It is experimental and potentially unstable, there is a reason core doesn't have an easy way to accomplish this.
 
 ## Features
 
